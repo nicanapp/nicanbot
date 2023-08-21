@@ -1,18 +1,6 @@
-import requests as request
-import json
+from youtube_transcript_api import YouTubeTranscriptApi
 
-headers = {
-    "Authorization":"Bearer TOKEN",
-    "Content-Type":"application/json"
-}
+list = YouTubeTranscriptApi.get_transcript("video_youtube_id")
 
-req = request.post("https://api.openai.com/v1/chat/completions", headers=headers, data=json.dumps({
-    "model":"gpt-3.5-turbo",
-    "messages":[
-        {
-            "role":"user",
-            "content":"Como é o cálculo da cobra?"
-        }
-    ]
-}))
-print(req.text)
+for i in list:
+    print(f" {i['start']} : {i['text']}")
