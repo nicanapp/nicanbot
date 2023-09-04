@@ -1,6 +1,3 @@
-from youtube_transcript_api import YouTubeTranscriptApi
+from lib.config import Config
 
-list = YouTubeTranscriptApi.get_transcript("video_youtube_id")
-
-for i in list:
-    print(f" {i['start']} : {i['text']}")
+c = Config().getMap()

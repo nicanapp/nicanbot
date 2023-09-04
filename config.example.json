@@ -1,0 +1,19 @@
+{
+    "api_url":"",
+    "key_chatgpt":"",
+    "key_api":"",
+    "accounts":{
+        "instagram":{
+            "user":"",
+            "pass":""
+        },
+        "facebook":{
+            "user":"",
+            "pass":""
+        },
+        "twitter":{
+            "user":"",
+            "pass":""
+        }
+    }
+}

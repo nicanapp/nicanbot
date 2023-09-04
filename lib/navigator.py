@@ -79,24 +79,7 @@ class Navigator :
         file.write(json.dumps(cookies))
         file.close()
 
-
-    def checkElement(self, type, value) :
-        try:
-            if   type == 'text':
-                self.driver.find_element(types['xpath'], "//*[text()='"+value+"']")  
-            elif type == 'link':
-                self.driver.find_element(types['xpath'], "//a[text()='"+value+"']")
-            elif type == 'placeholder':
-                self.driver.find_element(types['xpath'], "//input[@placeholder='"+value+"']")
-            elif type == 'button':
-                self.driver.find_element(types['xpath'], "//button[text()='"+value+"']")
-            else: 
-                self.driver.find_element(types[type], value)
-            return True
-        except:
-            return False
-
-    def findElements(self, type, value, limit=30) :
+    def findElements(self, type, value, limit=15) :
         naoEncontrou=True
         count=0
         els=[]

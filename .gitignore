@@ -1,5 +1,6 @@
 cookies/*.json
 key.txt
+config.json
 chromedriver
 # Byte-compiled / optimized / DLL files
 __pycache__/

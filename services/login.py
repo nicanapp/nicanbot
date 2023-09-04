@@ -5,7 +5,4 @@ navigator=Navigator("https://instagram.com")
 inputEmail=navigator.findElement("name", "username")
 inputEmail.click()
 
-
-
-
 navigator.sleep()
