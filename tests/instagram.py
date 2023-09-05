@@ -5,8 +5,6 @@ navigator=Navigator("https://www.instagram.com/")
 
 login = InstLogin(navigator)
 
-if login.isLogged(): print("Logado")
-
 main = InstMain(navigator)
 if not main.pesquisa("#flaviodino"):
     print("nao foi")

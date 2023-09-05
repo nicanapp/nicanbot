@@ -1,3 +1,3 @@
-from lib.config import Config
+from lib.instagram import *
+from lib.navigator import Navigator
 
-c = Config().getMap()

@@ -17,7 +17,7 @@ class ResponseService:
     _code:int = 1
     _count_errors:int = 0
     _message:str = ""
-    _local_error:str = ""
+    _local_error_link:str = ""
     _script:str
     _removeScript:bool = False
 
@@ -50,8 +50,8 @@ class ResponseService:
     def setMessage(self, message:str):
         self._message = message 
 
-    def setLocalError(self, local:str):
-        self._local_error = local
+    def setLocalErrorLink(self, local:str):
+        self._local_error_link = local
     
     
 

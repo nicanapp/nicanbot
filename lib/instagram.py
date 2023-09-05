@@ -1,17 +1,51 @@
 from lib.navigator import Navigator
-from entidades.PublishSM import PublishSM
-
+from entidades.Publish import Publish
+from entidades.Expressao import Expressao
+from lib.config import Config
 
 class InstLogin:
 
     navigator:Navigator = None
+    logged = True
+    fail = False
 
     def __init__(self, navigator:Navigator) -> None:
         self.navigator = navigator
+        inputEmail= self.navigator.findElement("name", "username", 5)
+        if inputEmail != False:
+            self.logged = False
+            self.login()
+        else:
+            self.navigator.sleep(1)
+            self.navigator.saveState()
 
     def isLogged(self) -> bool:
-        return True
+        return self.logged
+    
+    def isFail(self) -> bool:
+        return self.fail
+    
+    def login(self):
+        if self.logged: return
+        try:
+            inputEmail = self.navigator.findElement("name", "username",1)
 
+            c = Config().getMap()["accounts"]["instagram"]
+
+            inputEmail.click()
+            inputEmail.value(c["user"])
+
+            inputSenha = self.navigator.findElement("name", "password", 1)
+
+            inputSenha.click()
+            inputSenha.value(c["pass"]) 
+
+            self.navigator.findElement("text", "Entrar", 3).click()
+            self.navigator.sleep(10)
+            self.navigator.saveState()
+            self.logged = True
+        except:
+            self.fail = True
 
 
 class InstMain:
@@ -19,30 +53,26 @@ class InstMain:
     navigator:Navigator = None
     btnNext = None
 
-
     def __init__(self, navigator:Navigator) -> None:
         self.navigator = navigator
         pop = navigator.findElement("button", "Agora não", limit=3)
-        if pop != False: pop.click()
+        if pop != False: pop.click() 
 
+    def pesquisa(self, hashTag:str) -> bool:
 
-    def pesquisa(self, value:str) -> bool:
-        # se encontrou alguma hashtag com o valor da pesquisa clica e retorna true
-        # se não retorna false
         self.navigator.findElement("text", "Pesquisa").click()
 
         inputPesquisar=self.navigator.findElement("placeholder", "Pesquisar")
         inputPesquisar.click()
-        inputPesquisar.value(value)
+        inputPesquisar.value(hashTag)
 
-        self.navigator.sleep(1)
+        el = self.navigator.findElement("text", hashTag, 2)
 
-        if  not self.navigator.checkElement("text", "#flaviodino"):
-            return False 
+        if el == False : 
+            return False
+        else : el.click() 
         
-        self.navigator.findElement("text", "#flaviodino").click()    
-        
-        primeiraPub = self.navigator.findElement("xpath", '//*/article/div/div/div/div[1]/div[1]/a', limit=10)
+        primeiraPub = self.navigator.findElement("xpath", '//*/article/div/div/div/div[1]/div[1]/a', 5)
 
         if primeiraPub != False: 
             primeiraPub.click()
@@ -51,10 +81,14 @@ class InstMain:
         return False
     
     
-    def analise(self, cliente_id:int, expressao_id:int) -> PublishSM:
+    def analise(self, hashTag:str) -> Publish:
+        self.navigator.sleep(1)
         els = self.navigator.findElements("tag", "article")
-        print(els[1].getText())  
+        try :
+            els[1].getText()
 
+        except:
+            return False
     
     def next(self) -> None:
         try :
