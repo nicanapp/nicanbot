@@ -1,10 +1,12 @@
 from entidades.ResponseService import ResponseService
-from entidades.Expressao import Expressao
 from lib.instagram import *
 from lib.navigator import Navigator
 
-def main(expressao:Expressao) -> ResponseService:
+async def main(response:ResponseService):
+
     navigator = Navigator("https://www.instagram.com/")
+    expressao = response.getExpressao()
+    midia     = expressao.getMidia("instagram")
 
     if InstLogin(navigator).isFail():
         # erro ao tentar entrar no instagram
@@ -16,12 +18,9 @@ def main(expressao:Expressao) -> ResponseService:
     main.pesquisa("#saudeebeleza")
 
     x = 0
-    while x < 10:
+    while True:
         main.analise("#saudeebeleza")
-        main.next()
-        x += 1
+        if not main.next(): break
 
-    print("Encerrado")
     navigator.saveState()
     navigator.sleep()
-    return ResponseService()

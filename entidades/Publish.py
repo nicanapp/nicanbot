@@ -18,6 +18,9 @@ class Publish:
         self.text = text
         self.link = link
 
+    def getType(self):
+        return self.type
+
     def setEngajamento(self, engajamento:Engajamento) -> None:
         self.engajamento = engajamento
     

@@ -1,28 +1,14 @@
-
-"""
-
-codigos: 
-1 -> sucesso
-2 -> erro parcial  - erros que não interferem na execução do código
-3 -> erro perigoso - mesmos erros ocorrendo com frequencia
-4 -> erro critico  - erro que interfere na execução do código
-
-o script pode socilitar a indisponibilidade dele por causa de determinados erros
-
-"""
+from entidades.Expressao import Expressao
+from entidades.ResponseServiceError import ResponseServiceError
 
 
 class ResponseService:
     
-    _code:int = 1
-    _count_errors:int = 0
-    _message:str = ""
-    _local_error_link:str = ""
-    _script:str
-    _removeScript:bool = False
+    _expressao:Expressao = None
+    _listErrors:list[ResponseServiceError] = []
 
-    def __init__(self, script) -> None:
-        self._script = script
+    def __init__(self, expressao:Expressao) -> None:
+        self._expressao = expressao
 
     def commit(self):
         # aqui ele gera o arquivo se necessario
@@ -35,17 +21,14 @@ class ResponseService:
     def success(self):
         return self._code == 1
     
-    def addError(self):
-        self._count_errors += 1
+    def addError(self, responseError:ResponseServiceError):
+        self._listErrors.append(responseError)
+        if responseError.code == 3:
+            # erro critico! chama o commit
+            pass
 
-    def getCode(self):
-        return self._code
-    
-    def getCount(self):
-        return self._count_errors
-    
-    def setCode(self, code:int):
-        self._code = code
+    def getExpressao(self):
+        return self._expressao
     
     def setMessage(self, message:str):
         self._message = message 
@@ -53,5 +36,7 @@ class ResponseService:
     def setLocalErrorLink(self, local:str):
         self._local_error_link = local
     
+    def setExpressao(self, expressao:Expressao):
+        self._expressao = expressao
     
 
