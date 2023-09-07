@@ -2,13 +2,15 @@ from entidades.Expressao import Expressao
 from entidades.ResponseServiceError import ResponseServiceError
 
 
-class ResponseService:
+class Service:
     
-    _expressao:Expressao = None
+    _expressao:Expressao = {}
     _listErrors:list[ResponseServiceError] = []
 
-    def __init__(self, expressao:Expressao) -> None:
-        self._expressao = expressao
+    def __init__(self, expressao_map:{}) -> None:
+        #self._expressao = expressao_map
+        #cria o objeto Expressao
+        pass
 
     def commit(self):
         # aqui ele gera o arquivo se necessario
@@ -29,14 +31,6 @@ class ResponseService:
 
     def getExpressao(self):
         return self._expressao
-    
-    def setMessage(self, message:str):
-        self._message = message 
-
-    def setLocalErrorLink(self, local:str):
-        self._local_error_link = local
-    
-    def setExpressao(self, expressao:Expressao):
-        self._expressao = expressao
+ 
     
 

@@ -19,7 +19,6 @@ async def facebook_service():
         await asyncio.sleep(n)
         print("facebook : "+str(i)) 
 
-
 """
     1 - RECUPERA OS DOIS CLIENTES ATIVOS NO 'FULL'
     2 - RECUPERA TODOS OS OUTROS CLIENTES QUE ESTÃO SILENCIOSOS 
@@ -34,21 +33,12 @@ async def main():
     jsonlist = dummyData()
 
     for client in jsonlist:
-        
         print("CLIENTE ID : " + str(client["id"]))
-        
         for expressao in client["expressoes"]:
             # gera o objeto Service(expressao)
             print(expressao)
-            tasks = []
-            
-            for midia in expressao["midias"]:         
-                if   midia["slug"] == "instagram": tasks.append(instagram_service())
-                elif midia["slug"] == "twitter"  : tasks.append(twitter_service())
-                elif midia["slug"] == "facebook" : tasks.append(facebook_service())
-
+            tasks = [instagram_service(), twitter_service(), facebook_service()]
             await asyncio.gather(*tasks)
 
 asyncio.run(main())
-
 

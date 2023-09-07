@@ -1,8 +1,8 @@
-from entidades.ResponseService import ResponseService
+from entidades.Service import Service
 from lib.instagram import *
 from lib.navigator import Navigator
 
-async def main(response:ResponseService):
+async def main(response:Service):
 
     navigator = Navigator("https://www.instagram.com/")
     expressao = response.getExpressao()
