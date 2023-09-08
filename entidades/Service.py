@@ -4,13 +4,11 @@ from entidades.ResponseServiceError import ResponseServiceError
 
 class Service:
     
-    _expressao:Expressao = {}
+    _expressao:Expressao
     _listErrors:list[ResponseServiceError] = []
 
-    def __init__(self, expressao_map:{}) -> None:
-        #self._expressao = expressao_map
-        #cria o objeto Expressao
-        pass
+    def __init__(self, expresao:Expressao) -> None:
+        self._expressao = expresao
 
     def commit(self):
         # aqui ele gera o arquivo se necessario

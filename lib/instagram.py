@@ -60,18 +60,7 @@ class InstMain:
 
     def pesquisa(self, hashTag:str) -> bool:
 
-        #self.navigator.findElement("text", "Pesquisa").click()
-
-        #inputPesquisar=self.navigator.findElement("placeholder", "Pesquisar")
-        #inputPesquisar.click()
-        #inputPesquisar.value(hashTag)
-
-        #el = self.navigator.findElement("text", hashTag, 2)
-
-        #if el == False : 
-        #    return False
-        #else : el.click() 
-        
+        self.navigator.goto(f"explore/tags/{hashTag}/")
         
         primeiraPub = self.navigator.findElement("xpath", '//*/article/div/div/div/div[1]/div[1]/a', 5)
 
@@ -82,12 +71,12 @@ class InstMain:
         return False
     
     
-    def analise(self, hashTag:str) -> Publish:
+    def analise(self) -> Publish:
         self.navigator.sleep(1)
         els = self.navigator.findElements("tag", "article")
         try :
-            els[1].getText()
-
+            print(els[1].getText())
+            return True
         except:
             return False
     

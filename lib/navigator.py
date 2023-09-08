@@ -55,9 +55,9 @@ class Navigator :
         if self.getState():
             self.driver.get(self.site)
     
-    def goto(self, url):
+    def goto(self, url, full=False):
         self.saveState()
-        self.driver.get(url)
+        self.driver.get(url if full else self.site+url)
 
     def setUrl(self) :
         if self.file is None:

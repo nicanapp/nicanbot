@@ -1,7 +1,25 @@
 from entidades.Publish import Publish
-from entidades.MidiaConfig import MidiaConfig
 from lib.analise import analiseAndCommit
 import datetime
+
+class MidiaConfig:
+
+    _views:int = 0
+    _curtidas:int = 0
+    _verificados:bool = False
+    _noConfig:bool
+
+    def __init__(self, config={}) -> None:
+        self._noConfig = config['noConfig']
+        self._curtidas = config['curtidas']
+        self._verificados = config['verificados']
+        self._views = config['views']
+
+    def compare(self, publish:Publish) -> bool:
+        if self._noConfig: return True
+        # compara os valores da publicação com os do config
+        return True
+        
 
 class Midia:
 
@@ -24,4 +42,4 @@ class Midia:
         if not force and len(self._listPublish < 100): return
         analiseAndCommit(self._listPublish)
         
-        
+

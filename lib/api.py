@@ -36,19 +36,20 @@ def dummyData():
                     "id":1,
                     "last":"",
                     "silencioso":False,
-                    "objeto_analise":"",
-                    "expressao":"",
+                    "objeto_analise":"Flavio Dino",
+                    "expressao":"Flavio Dino",
                     "midias":[
                         {
                             "slug":"instagram",
-                            "config":{},
-                        },
-                        {
-                            "slug":"facebook",
-                            "config":{},
+                            "config":{
+                                "noConfig":False,
+                                "curtidas":0,
+                                "verificados":False,
+                                "views":0
+                            },
                         }
                     ],
-                    "hashtags":[]
+                    "hashtags":["falviodino", "ministroflaviodino"]
                 }
             ]
         }
