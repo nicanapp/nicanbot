@@ -26,8 +26,8 @@ class Midia:
     _midiaConfig:MidiaConfig
     _listPublish:list[Publish] = []
 
-    def __init__(self, midiaConfig:MidiaConfig, data_last_pub:str="") -> None:
-        self._midiaConfig = midiaConfig
+    def __init__(self, midiaConfig:{}, data_last_pub:str="") -> None:
+        self._midiaConfig = MidiaConfig(midiaConfig)
         if not data_last_pub == "":
             datasplit = data_last_pub.split("-")
             self._data_last_pub = datetime.date(year=datasplit[0], month=datasplit[1], day=datasplit[2])

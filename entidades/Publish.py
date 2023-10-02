@@ -2,9 +2,9 @@ from entidades.Engajamento import Engajamento
 
 class Publish:
 
-    type:str
+    midiaSlug:str
 
-    avaliacao:int = 0 # 0 neutro | 1 positivo | 2 negativo
+    avaliacao:int = 0 # 0 - neutro ou não identificado | 1 - positivo | 2 - negativo
 
     text:str = ""
     data:str = ""
@@ -13,13 +13,13 @@ class Publish:
 
     engajamento:Engajamento = None
 
-    def __init__(self, type:str, text:str, link:str) -> None:
-        self.type = type
+    def __init__(self, midiaSlug:str, text:str, link:str) -> None:
+        self.midiaSlug = midiaSlug
         self.text = text
         self.link = link
 
-    def getType(self):
-        return self.type
+    def getMidiaSlug(self):
+        return self.midiaSlug
 
     def setEngajamento(self, engajamento:Engajamento) -> None:
         self.engajamento = engajamento

@@ -12,7 +12,7 @@ class Expressao:
     _objeto_analise:str
     _silencioso:bool
     _data_last_pub:datetime.date
-    _midias:{} = {}
+    _midias: dict[str, Midia] = {}
 
     def __init__(self, client_id:int, expressao_id:int, expressao:str, objeto_analise:str, silencioso=False) -> None:
         self._client_id = client_id

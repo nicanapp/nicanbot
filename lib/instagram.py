@@ -1,7 +1,24 @@
 from lib.navigator import Navigator
 from entidades.Publish import Publish
-from entidades.Expressao import Expressao
+from entidades.Engajamento import Engajamento
 from lib.config import Config
+import re
+
+# sem, min, d, h
+# fazer o calculo de quantidade de dias atrás e salvar
+# testar o midia config verificando se é adicionado a publicação com as config
+
+def generatePublish(text:str, link:str) -> Publish: 
+    tex = text.split("Ver tradução")[0]
+    res = re.search("([\d.]+)\s*(curtidas)", tex)
+    print(tex)
+    eng = Engajamento()
+    eng.curtidas = 0 if res == None else int(res.group(1).replace(".", ""))
+    pub = Publish(midiaSlug="instagram", text=tex, link=link)
+    pub.setEngajamento(eng)
+    return pub
+    #print(pub)
+
 
 class InstLogin:
 
@@ -52,11 +69,15 @@ class InstMain:
 
     navigator:Navigator = None
     btnNext = None
+    startNext = False
 
     def __init__(self, navigator:Navigator) -> None:
         self.navigator = navigator
         pop = navigator.findElement("button", "Agora não", limit=3)
         if pop != False: pop.click() 
+
+    def setStartNext(self, status:bool):
+        self.startNext = status
 
     def pesquisa(self, hashTag:str) -> bool:
 
@@ -70,22 +91,21 @@ class InstMain:
 
         return False
     
-    
-    def analise(self) -> Publish:
+    def getPublish(self) -> Publish:
         self.navigator.sleep(1)
         els = self.navigator.findElements("tag", "article")
         try :
-            print(els[1].getText())
-            return True
+            return generatePublish(els[1].getText(), self.navigator.currentUrl())
         except:
-            return False
+            return None
     
     def next(self) -> None:
         try :
             btns = self.navigator.findElements("css", "button>div>span", limit=3)
             if btns == False: return False
             c = len(btns)
-            if c == 0: return False
+            if c == 0 or (self.startNext and c < 2): return False
+            self.startNext = True
             btns[c - 1].click()
             return True
         except:

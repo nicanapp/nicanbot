@@ -16,10 +16,13 @@ async def main(service:Service):
     main = InstMain(navigator)
 
     for tag in hashtags:
+        main.setStartNext(False)
         main.pesquisa(tag)
 
         while True:
-            main.analise()
+            pub = main.getPublish()
+            if pub != False:
+                expressao.addPublish("instagram", pub)
             if not main.next(): break
 
     navigator.saveState()

@@ -59,6 +59,9 @@ class Navigator :
         self.saveState()
         self.driver.get(url if full else self.site+url)
 
+    def currentUrl(self):
+        return self.driver.current_url
+
     def setUrl(self) :
         if self.file is None:
             pattern = '(https:\/\/)?(www\.)?(\w+\.\w+)'

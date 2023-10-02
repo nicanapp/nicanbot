@@ -49,7 +49,10 @@ def dummyData():
                             },
                         }
                     ],
-                    "hashtags":["falviodino", "ministroflaviodino"]
+                    "hashtags":[
+                        "falleninsider", 
+                        #"ministroflaviodino"
+                    ]
                 }
             ]
         }
