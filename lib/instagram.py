@@ -17,7 +17,6 @@ def generatePublish(text:str, link:str) -> Publish:
     pub = Publish(midiaSlug="instagram", text=tex, link=link)
     pub.setEngajamento(eng)
     return pub
-    #print(pub)
 
 
 class InstLogin:

@@ -9,8 +9,7 @@ class Publish:
     text:str = ""
     data:str = ""
     link:str = ""
-    textoDestacado:str = ""
-
+    
     engajamento:Engajamento = None
 
     def __init__(self, midiaSlug:str, text:str, link:str) -> None:
@@ -24,11 +23,8 @@ class Publish:
     def setEngajamento(self, engajamento:Engajamento) -> None:
         self.engajamento = engajamento
     
-    def setAvaliacao(self, avaliacao) -> None:
-        self.avaliacao = avaliacao
+    def setAvaliacao(self, avaliacao:str) -> None:
+        self.avaliacao = int(avaliacao)
 
     def setData(self, dia, mes, ano) -> None:
         self.data = f"{ano}-{mes}-{dia}"
-
-    def setTextoDestacado(self, texto:str) -> None:
-        self.textoDestacado = texto

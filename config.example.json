@@ -1,6 +1,6 @@
 {
     "api_url":"",
-    "key_chatgpt":"",
+    "token_chatgpt":"",
     "key_api":"",
     "accounts":{
         "instagram":{

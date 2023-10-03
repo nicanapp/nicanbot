@@ -6,7 +6,6 @@ class MidiaConfig:
 
     _views:int = 0
     _curtidas:int = 0
-    _verificados:bool = False
     _noConfig:bool
 
     def __init__(self, config={}) -> None:
@@ -17,7 +16,9 @@ class MidiaConfig:
 
     def compare(self, publish:Publish) -> bool:
         if self._noConfig: return True
-        # compara os valores da publicação com os do config
+        engajamento = publish.engajamento
+        if engajamento.curtidas < self._curtidas: return False 
+        if engajamento.visualizacoes < self._views: return False
         return True
         
 
@@ -37,9 +38,8 @@ class Midia:
         if self._midiaConfig.compare(publish):
             self._listPublish.append(publish)
 
-    def commit(self, force=False):
+    def commit(self, objeto_avaliacao:str):
         # envia as publicações para análise e upload
-        if not force and len(self._listPublish < 100): return
-        analiseAndCommit(self._listPublish)
+        analiseAndCommit(self._listPublish,objeto_avaliacao)
         
 

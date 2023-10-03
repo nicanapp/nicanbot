@@ -9,7 +9,7 @@ class Expressao:
     _client_id:int
     _expressao:str 
     _expressao_id:int
-    _objeto_analise:str
+    _objeto_avaliacao:str
     _silencioso:bool
     _data_last_pub:datetime.date
     _midias: dict[str, Midia] = {}
@@ -29,6 +29,12 @@ class Expressao:
 
     def addPublish(self, slug:str, publish:Publish):
         self._midias[slug].addPublish(publish)
+
+    def commitPublish(self, slug:str):
+        self._midias[slug].commit(self._objeto_avaliacao)
+
+    def getObjetoAvaliacao(self):
+        return self._objeto_avaliacao
 
     def getHashTags(self):
         return self._hashtags

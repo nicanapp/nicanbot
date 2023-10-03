@@ -2,6 +2,8 @@ from entidades.Service import Service
 from lib.instagram import *
 from lib.navigator import Navigator
 
+SLUG_SERVICE = "instagram"
+
 async def main(service:Service):
 
     navigator = Navigator("https://www.instagram.com/")
@@ -16,14 +18,17 @@ async def main(service:Service):
     main = InstMain(navigator)
 
     for tag in hashtags:
+
         main.setStartNext(False)
         main.pesquisa(tag)
 
         while True:
             pub = main.getPublish()
             if pub != False:
-                expressao.addPublish("instagram", pub)
+                expressao.addPublish(SLUG_SERVICE, pub)
             if not main.next(): break
+
+    expressao.commitPublish(SLUG_SERVICE)
 
     navigator.saveState()
     navigator.sleep()
