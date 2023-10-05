@@ -1,4 +1,4 @@
-from lib.navigator import Navigator
+from entidades.ServiceAbstract import Login, Main
 from entidades.Publish import Publish
 from entidades.Engajamento import Engajamento
 from lib.config import Config
@@ -19,14 +19,9 @@ def generatePublish(text:str, link:str) -> Publish:
     return pub
 
 
-class InstLogin:
-
-    navigator:Navigator = None
-    logged = True
-    fail = False
-
-    def __init__(self, navigator:Navigator) -> None:
-        self.navigator = navigator
+class InstLogin(Login):
+        
+    def onCreate(self) -> None:
         inputEmail= self.navigator.findElement("name", "username", 5)
         if inputEmail != False:
             self.logged = False
@@ -35,13 +30,7 @@ class InstLogin:
             self.navigator.sleep(1)
             self.navigator.saveState()
 
-    def isLogged(self) -> bool:
-        return self.logged
-    
-    def isFail(self) -> bool:
-        return self.fail
-    
-    def login(self):
+    def login(self) -> None:
         if self.logged: return
         try:
             inputEmail = self.navigator.findElement("name", "username",1)
@@ -64,15 +53,13 @@ class InstLogin:
             self.fail = True
 
 
-class InstMain:
+class InstMain(Main):
 
-    navigator:Navigator = None
     btnNext = None
     startNext = False
 
-    def __init__(self, navigator:Navigator) -> None:
-        self.navigator = navigator
-        pop = navigator.findElement("button", "Agora não", limit=3)
+    def checkPop(self):
+        pop = self.navigator.findElement("button", "Agora não", limit=3)
         if pop != False: pop.click() 
 
     def setStartNext(self, status:bool):

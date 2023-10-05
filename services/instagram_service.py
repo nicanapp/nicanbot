@@ -16,6 +16,7 @@ async def main(service:Service):
         pass
     
     main = InstMain(navigator)
+    main.checkPop()
 
     for tag in hashtags:
 

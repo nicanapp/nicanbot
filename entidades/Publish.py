@@ -23,8 +23,8 @@ class Publish:
     def setEngajamento(self, engajamento:Engajamento) -> None:
         self.engajamento = engajamento
     
-    def setAvaliacao(self, avaliacao:str) -> None:
-        self.avaliacao = int(avaliacao)
+    def setAvaliacao(self, avaliacao:int) -> None:
+        self.avaliacao = avaliacao
 
     def setData(self, dia, mes, ano) -> None:
         self.data = f"{ano}-{mes}-{dia}"
