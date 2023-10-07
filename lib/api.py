@@ -36,8 +36,8 @@ def dummyData():
                     "id":1,
                     "last":"",
                     "silencioso":False,
-                    "objeto_analise":"Flavio Dino",
-                    "expressao":"Flavio Dino",
+                    "objeto_avaliacao":"Flavio Dino",
+                    "expressao":"Flávio Dino",
                     "midias":[
                         {
                             "slug":"instagram",
@@ -45,13 +45,25 @@ def dummyData():
                                 "noConfig":False,
                                 "curtidas":0,
                                 "verificados":False,
-                                "views":0
+                                "views":0,
+                                "ignoreme":""
+                            },
+                        },
+                        {
+                            "slug":"twitter",
+                            "config":{
+                                "noConfig":False,
+                                "curtidas":0,
+                                "verificados":False,
+                                "views":0,
+                                "ignoreme":"FlavioDino"
                             },
                         }
                     ],
                     "hashtags":[
-                        "falleninsider", 
-                        #"ministroflaviodino"
+                        "ministroflaviodino",
+                        "flaviodino",
+                        "fláviodino"
                     ]
                 }
             ]

@@ -1,5 +1,6 @@
 from lib.twitter import TwitterLogin, TwitterMain
 from lib.navigator import Navigator
 
-navigator = Navigator("https://twitter.com/")
-TwitterLogin(navigator)
+from datetime import date,timedelta
+
+end_date = date.today() + timedelta(days=10)

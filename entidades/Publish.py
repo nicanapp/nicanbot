@@ -26,5 +26,20 @@ class Publish:
     def setAvaliacao(self, avaliacao:int) -> None:
         self.avaliacao = avaliacao
 
-    def setData(self, dia, mes, ano) -> None:
-        self.data = f"{ano}-{mes}-{dia}"
+    def setData(self, data:str) -> None:
+        self.data = data
+
+    def toString(self) -> str:
+        return f"""
+        =======================================================
+            midia:{self.midiaSlug}
+            avaliacao:{self.avaliacao}
+            link:{self.link}
+            data:{self.data}
+            engajamento:{self.engajamento.toString()}
+        -------------------------------------------------------
+        texto:
+        -------------------------------------------------------
+        {self.text}
+        =======================================================
+        """

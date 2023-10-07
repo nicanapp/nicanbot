@@ -5,5 +5,6 @@ from lib.chatgpt import avaliacao
 def analiseAndCommit(publicacoes:list[Publish], objeto_avaliacao:str) -> bool:
     # chatgpt analise e salva no banco de dados
     for pub in publicacoes:
-        avaliacao(pub, objeto_avaliacao)
+        print(pub.toString())
+        # avaliacao(pub, objeto_avaliacao)
     

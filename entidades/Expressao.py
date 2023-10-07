@@ -1,5 +1,5 @@
 from entidades.Publish import Publish
-from entidades.Midia import Midia, MidiaConfig
+from entidades.Midia import Midia
 import datetime
 
 class Expressao:
@@ -14,11 +14,11 @@ class Expressao:
     _data_last_pub:datetime.date
     _midias: dict[str, Midia] = {}
 
-    def __init__(self, client_id:int, expressao_id:int, expressao:str, objeto_analise:str, silencioso=False) -> None:
+    def __init__(self, client_id:int, expressao_id:int, expressao:str, objeto_avaliacao:str, silencioso=False) -> None:
         self._client_id = client_id
         self._expressao = expressao
         self._expressao_id = expressao_id
-        self._objeto_analise = objeto_analise
+        self._objeto_avaliacao = objeto_avaliacao
         self._silencioso = silencioso
 
     def addHashTag(self, hashTag:str):
@@ -42,6 +42,9 @@ class Expressao:
     def getMidia(self, slug:str):
         return self._midias[slug]
     
+    def getExpressao(self):
+        return self._expressao
+    
 
 class ExpressaoFactory:
 
@@ -53,7 +56,7 @@ class ExpressaoFactory:
             client_id=client_id,
             expressao_id=expressao_map["id"],
             expressao=expressao_map["expressao"],
-            objeto_analise=expressao_map["objeto_analise"],
+            objeto_avaliacao=expressao_map["objeto_avaliacao"],
             silencioso=expressao_map["silencioso"]
         )
         for midia in expressao_map["midias"]:

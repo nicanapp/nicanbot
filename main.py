@@ -2,6 +2,7 @@ import asyncio
 from entidades.Service import Service
 from entidades.Expressao import ExpressaoFactory
 from services.instagram_service import main as instagram_service
+from services.twitter_service import main as twitter_service
 from lib.api import dummyData
 
 
@@ -31,9 +32,9 @@ async def main():
             tasks = []
             
             for midia in expressao_map["midias"]:         
-                if   midia["slug"] == "instagram": tasks.append(instagram_service(service))
-                #elif midia["slug"] == "twitter"  : tasks.append(twitter_service())
-                #elif midia["slug"] == "facebook" : tasks.append(facebook_service())
+                #if   midia["slug"] == "instagram": tasks.append(instagram_service(service))
+                if midia["slug"] == "twitter"  : tasks.append(twitter_service(service))
+                #elif midia["slug"] == "facebook" : tasks.append(facebook_service(service))
 
             await asyncio.gather(*tasks)
 

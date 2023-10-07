@@ -25,7 +25,7 @@ class Element :
     def getText(self):
         return self.element.get_attribute('innerText')
     
-    def value(self, text):
+    def value(self, text=""):
         self.element.send_keys(text)
     
     def click(self) :
@@ -55,6 +55,10 @@ class Navigator :
         if self.getState():
             self.driver.get(self.site)
     
+    def scrooldown(self):
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        self.sleep(2)
+
     def goto(self, url, full=False):
         self.saveState()
         self.driver.get(url if full else self.site+url)
@@ -86,7 +90,7 @@ class Navigator :
         file.write(json.dumps(cookies))
         file.close()
 
-    def findElements(self, type, value, limit=15) :
+    def findElements(self, type, value, limit=15) -> list[Element] | bool:
         naoEncontrou=True
         count=0
         els=[]

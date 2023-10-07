@@ -2,6 +2,7 @@ from entidades.ServiceAbstract import Login, Main
 from entidades.Publish import Publish
 from entidades.Engajamento import Engajamento
 from lib.config import Config
+from datetime import date,timedelta
 import re
 
 # sem, min, d, h
@@ -10,12 +11,24 @@ import re
 
 def generatePublish(text:str, link:str) -> Publish: 
     tex = text.split("Ver tradução")[0]
-    res = re.search("([\d.]+)\s*(curtidas)", tex)
-    print(tex)
+    res = re.search("[^\w]([\d.]+)\s*(curtidas)", tex)
+    dat = re.search("(\d+)\s(sem|min|d|h)([^\w]|$)", tex)
+    
+    infnum = int(dat.group(1))
+    inftyp = dat.group(2)
+
+    hoje = date.today()
+
+    if inftyp == 'sem': infnum *= 7
+    
+    data = f"{hoje}" if inftyp in ['min', 'h'] else f"{hoje - timedelta(days=infnum)}"
     eng = Engajamento()
     eng.curtidas = 0 if res == None else int(res.group(1).replace(".", ""))
+
     pub = Publish(midiaSlug="instagram", text=tex, link=link)
+    pub.setData(data)
     pub.setEngajamento(eng)
+    
     return pub
 
 
@@ -77,7 +90,7 @@ class InstMain(Main):
 
         return False
     
-    def getPublish(self) -> Publish:
+    def getPublish(self) -> Publish | list[Publish]:
         self.navigator.sleep(1)
         els = self.navigator.findElements("tag", "article")
         try :

@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 class Login(ABC):
     
-    logged = True
+    logged = False
     fail = False
 
     def __init__(self, navigator:Navigator) -> None:
@@ -34,5 +34,5 @@ class Main(ABC):
         self.navigator = navigator
 
     @abstractmethod
-    def getPublish(self) -> Publish:
+    def getPublish(self) -> Publish | list[Publish]:
         pass
