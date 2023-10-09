@@ -22,6 +22,9 @@ class Element :
     def __init__(self, element) -> None:
         self.element = element
 
+    def getValueOf(self, att:str):
+        return self.element.get_attribute(att)
+
     def getText(self):
         return self.element.get_attribute('innerText')
     
@@ -57,7 +60,6 @@ class Navigator :
     
     def scrooldown(self):
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        self.sleep(2)
 
     def goto(self, url, full=False):
         self.saveState()
@@ -90,22 +92,23 @@ class Navigator :
         file.write(json.dumps(cookies))
         file.close()
 
-    def findElements(self, type, value, limit=15) -> list[Element] | bool:
+    def findElements(self, type, value, limit=15, element:Element=None) -> list[Element] | bool:
         naoEncontrou=True
         count=0
         els=[]
+        finder = element.element if element != None else self.driver
         while naoEncontrou and count < limit:
             try:
                 if   type == 'text':
-                    elements = self.driver.find_elements(types['xpath'], "//*[text()='"+value+"']")  
+                    elements = finder.find_elements(types['xpath'], "//*[text()='"+value+"']")  
                 elif type == 'link':
-                    elements = self.driver.find_elements(types['xpath'], "//a[text()='"+value+"']")
+                    elements = finder.find_elements(types['xpath'], "//a[text()='"+value+"']")
                 elif type == 'placeholder':
-                    elements = self.driver.find_elements(types['xpath'], "//input[@placeholder='"+value+"']")
+                    elements = finder.find_elements(types['xpath'], "//input[@placeholder='"+value+"']")
                 elif type == 'button':
-                    elements = self.driver.find_elements(types['xpath'], "//button[text()='"+value+"']")
+                    elements = finder.find_elements(types['xpath'], "//button[text()='"+value+"']")
                 else: 
-                    elements = self.driver.find_elements(types[type], value)
+                    elements = finder.find_elements(types[type], value)
                 naoEncontrou= False
             except:
                 time.sleep(1)
@@ -115,22 +118,23 @@ class Navigator :
         return False if naoEncontrou else els
     
 
-    def findElement(self, type, value, limit=30) :
+    def findElement(self, type, value, limit=15, element:Element=None) :
         naoEncontrou=True
         count=0
         el=None
+        finder = element.element if element != None else self.driver
         while naoEncontrou and count < limit:
             try:
                 if   type == 'text':
-                    element = self.driver.find_element(types['xpath'], "//*[text()='"+value+"']")  
+                    element = finder.find_element(types['xpath'], "//*[text()='"+value+"']")  
                 elif type == 'link':
-                    element = self.driver.find_element(types['xpath'], "//a[text()='"+value+"']")
+                    element = finder.find_element(types['xpath'], "//a[text()='"+value+"']")
                 elif type == 'placeholder':
-                    element = self.driver.find_element(types['xpath'], "//input[@placeholder='"+value+"']")
+                    element = finder.find_element(types['xpath'], "//input[@placeholder='"+value+"']")
                 elif type == 'button':
-                    element = self.driver.find_element(types['xpath'], "//button[text()='"+value+"']")
+                    element = finder.find_element(types['xpath'], "//button[text()='"+value+"']")
                 else: 
-                    element = self.driver.find_element(types[type], value)
+                    element = finder.find_element(types[type], value)
                 el = Element(element)
                 naoEncontrou= False
             except:

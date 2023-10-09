@@ -10,17 +10,17 @@ async def main(service:Service):
     expressao = service.getExpressao()
 
     if TwitterLogin(navigator).isFail():
-        pass
+        return
 
     main = TwitterMain(navigator)
     main.search("search?q="+expressao.getExpressao()+"&src=typed_query")
-    navigator.sleep(2)
+    navigator.sleep(5)
 
     max = 30
     c = 1
     dontstop = True
     while dontstop:
-        navigator.scrooldown()
+        main.checkreload()
         publis = main.getPublish()
         for pub in publis:
             print(pub)
@@ -28,6 +28,7 @@ async def main(service:Service):
             # expressao.addPublish(SLUG_SERVICE, pub)
             c+=1
             dontstop = c < max
-
+        navigator.scrooldown()
+        navigator.sleep(5)
     print(f"Total: {c}")
     navigator.sleep()

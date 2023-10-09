@@ -7,5 +7,5 @@ class Engajamento:
     compartilhamento:int = 0 
 
     def toString(self) -> str:
-        return f"""[ curtidas:{self.curtidas} | visualizações:{self.visualizacoes} ]"""
+        return f"""[ curtidas:{self.curtidas} | visualizações:{self.visualizacoes} | compartilhamento:{self.compartilhamento} ]"""
 

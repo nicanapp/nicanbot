@@ -34,7 +34,7 @@ async def main():
             for midia in expressao_map["midias"]:         
                 #if   midia["slug"] == "instagram": tasks.append(instagram_service(service))
                 if midia["slug"] == "twitter"  : tasks.append(twitter_service(service))
-                #elif midia["slug"] == "facebook" : tasks.append(facebook_service(service))
+                #if midia["slug"] == "facebook" : tasks.append(facebook_service(service))
 
             await asyncio.gather(*tasks)
 
