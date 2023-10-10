@@ -10,11 +10,11 @@ import re
 # (https?:\/\/)?(www.)?(x.com\/|twitter.com\/)?([^\/]+)\/status\/([^\/]+)
 
 # regex pega a data
-# (([\d]+)([\s\w]+)?(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)([^\d]+)?(\d+)?|(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)([\s\w]+)?([\d]+)([^\d]+)?(\d+)?)
+# ((\d+)([\s\w]+)?(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)([^\d]+)?(\d+)?|(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)([\s]+)?(\d+)([^\d]+)?(\d+)?)
 
 def generateData(data:str):
 
-    r = re.search("((\d+)([\s\w]+)?(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)([^\d]+)?(\d+)?|(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)([\s]+)?(\d+)([^\d]+)?(\d+)?)", data)
+    r = re.search("((\d+)([\s\w]+)?(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)([^\d]+)?(\d+)?|(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)([\s]+)?(\d+)([^\d]+)?(\d+)?)", data)
     if r == None: return date.today().strftime('%Y-%m-%d')
         
     maparegex = {
@@ -47,7 +47,7 @@ def generateData(data:str):
             pmap.append(maparegex[key])
             mapa[maparegex[key]] = r.group(key+1)
 
-    return (mapa['ano'] if mapa['ano'] != '' else str(date.today().year))+"-"+mapameses[mapa['mes']]+"-"+(mapa['dia'] if len(mapa['dia']) > 9 else "0"+mapa['dia'])
+    return (mapa['ano'] if mapa['ano'] != '' else str(date.today().year))+"-"+mapameses[mapa['mes']]+"-"+(mapa['dia'] if len(mapa['dia']) < 2 else "0"+mapa['dia'])
 
 
 
