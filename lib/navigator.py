@@ -25,8 +25,13 @@ class Element :
     def getValueOf(self, att:str):
         return self.element.get_attribute(att)
 
-    def getText(self):
-        return self.element.get_attribute('innerText')
+    def getText(self) -> str:
+        try:
+            text = self.element.get_attribute('innerText')
+            return text
+        except:
+            print("Erro no Element não foi possível pegar o InnerText da publicação")
+            return ""
     
     def value(self, text=""):
         self.element.send_keys(text)
@@ -48,7 +53,7 @@ class Navigator :
     def __init__(self, site) -> None:
         
         options = Options()
-        options.add_experimental_option('prefs', {'intl.accept_languages': 'pt,pt_BR'})
+        options.add_experimental_option('prefs', {'intl.accept_languages': 'pt,pt_BR', "profile.default_content_setting_values.notifications" : 2})
         # options.add_argument('--headless=new')
         self.driver = webdriver.Chrome(executable_path='chromedriver', chrome_options=options)
         self.driver.set_window_size(2560, 1440)
@@ -118,7 +123,7 @@ class Navigator :
         return False if naoEncontrou else els
     
 
-    def findElement(self, type, value, limit=15, element:Element=None) :
+    def findElement(self, type, value, limit=15, element:Element=None) -> Element | bool:
         naoEncontrou=True
         count=0
         el=None

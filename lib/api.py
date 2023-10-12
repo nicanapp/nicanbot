@@ -58,6 +58,16 @@ def dummyData():
                                 "views":0,
                                 "ignoreme":"FlavioDino"
                             },
+                        },
+                        {
+                            "slug":"facebook",
+                            "config":{
+                                "noConfig":False,
+                                "curtidas":0,
+                                "verificados":False,
+                                "views":0,
+                                "ignoreme":"FlavioDino"
+                            },
                         }
                     ],
                     "hashtags":[
