@@ -22,7 +22,7 @@ class Element :
     def __init__(self, element) -> None:
         self.element = element
 
-    def getValueOf(self, att:str):
+    def getValueOf(self, att:str) -> str:
         return self.element.get_attribute(att)
 
     def getText(self) -> str:
@@ -63,6 +63,12 @@ class Navigator :
         if self.getState():
             self.driver.get(self.site)
     
+    def exec(self, script:str) -> str | bool:
+        try:
+            return self.driver.execute_script(script)
+        except:
+            return False
+
     def scrooldown(self):
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
@@ -139,6 +145,7 @@ class Navigator :
                 elif type == 'button':
                     element = finder.find_element(types['xpath'], "//button[text()='"+value+"']")
                 else: 
+                    #print("tentando -> "+value)
                     element = finder.find_element(types[type], value)
                 el = Element(element)
                 naoEncontrou= False

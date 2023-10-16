@@ -43,8 +43,11 @@ class InstLogin(Login):
             self.navigator.sleep(1)
             self.navigator.saveState()
 
+
     def login(self) -> None:
+        
         if self.logged: return
+
         try:
             inputEmail = self.navigator.findElement("name", "username",1)
 
@@ -62,7 +65,9 @@ class InstLogin(Login):
             self.navigator.sleep(10)
             self.navigator.saveState()
             self.logged = True
+
         except:
+            
             self.fail = True
 
 
